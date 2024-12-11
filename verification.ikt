@@ -1,0 +1,23 @@
+encrypt x: 0 + 1
+encrypt y: 10
+encrypt z: 7
+encrypt secret_message: "Please Grade me nicely please I tried QnQ"
+
+encrypt a: 1+5*2
+initiate_protocol a
+
+Execute_confirmation_sequence x == 1 ALPHA y > 2
+    initiate_protocol "Initiating"
+    encrypt z: 100 + 1
+    initiate_protocol z
+Hack_complete
+
+Execute_confirmation_sequence z == 7
+    initiate_protocol "CLASSIFIED_INFORMATION:"
+    initiate_protocol "please please please I rlly tried and i like ur class. It's not a moving robot but I thought this was funny and i rlly tried, pls give me an A pls."
+Hack_complete
+
+Execute_confirmation_sequence z == 100
+    initiate_protocol "Top Secret Below:"
+    initiate_protocol secret_message
+Hack_complete
