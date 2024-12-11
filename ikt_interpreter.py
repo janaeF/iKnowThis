@@ -150,7 +150,7 @@ class Interpreter:
                     resp = requests.post('https://textbelt.com/text', {
                     'phone': number,
                     'message': 'Hello, ' + recipient + '. ' + msg,
-                    'key': '2e323455d3ca12b3c04d4e71e4ed72d8b338d7cf8uZRSYQABgKYEWALqlanGa9al', #append '_test' to not use up texts but test if functional
+                    'key': '2e323455d3ca12b3c04d4e71e4ed72d8b338d7cf8uZRSYQABgKYEWALqlanGa9al_test', #append '_test' to not use up texts but test if functional
                     })
                     print(resp.json()) 
                     print('Successfully infected ' + recipient + ' at ' + number)
@@ -227,56 +227,8 @@ class Interpreter:
                 else:
                     print("ACCESS_DENIED.")
 
-            if 'spawn_matrix' in stmt:
-                stmt = stmt.replace("spawn_matrix", "").strip()
-                parts = stmt.split()
-
-                #name, rows, cols
-                var_name = parts[0] 
-                rows = int(parts[1])  
-                cols = int(parts[2])  
-
-                #default matrix w/ 0's
-                matrix = []
-                for i in range(rows):  
-                    row = [0] * cols 
-                    matrix.append(row)  # Add row to the matrix
-
-                self.state[var_name] = matrix   #store to state
-
-                print(f"Matrix {var_name} created with dimensions {rows}x{cols}.")
-                self.print_matrix(self.state[var_name])  #initialized matrix
-
-            elif 'override_protocol_m' in stmt:
-                stmt = stmt.replace("override_protocol_m", "").strip()
-                parts = stmt.split(maxsplit=3)  #name, row, col
-
-                var_name = parts[0]  
-                row = int(parts[1])  
-                col = int(parts[2])  
-
-                value = float(parts[3])  #print as float
-
-                if var_name in self.state:  #update if exists
-                    matrix = self.state[var_name] 
-                    matrix[row][col] = value
-                    print(f"Overrode {var_name}[{row}][{col}] to {value}.")
-                    self.print_matrix(matrix)  # Print new matrix
-                else:
-                    print(f"Error, {var_name} D.N.E.")
-
             i += 1        
-
-    def print_matrix(self, matrix):
-        for row in matrix:
-            row_string = ""
             
-            for ele in row:
-                row_string += str(ele) + " "  # add element
-            
-            print("[", row_string, "]") #pritn 
-
-
-interpreter = Interpreter('infect.ikt')
+interpreter = Interpreter('locate_Dabish.ikt')
 file = interpreter.read_file()
 interpreter.interpret(file)
